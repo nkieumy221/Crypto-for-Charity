@@ -264,6 +264,9 @@ const Header = ({ auth }) => {
 						<Link to="/about">
 							<li className={styles.link}>Giới thiệu</li>
 						</Link>
+						<Link to="/contact">
+							<li className={styles.link}>Hòm thư</li>
+						</Link>
 						{auth ? (
 							<>
 								<Dropdown className={styles.dropdownGroup}>
@@ -294,7 +297,6 @@ const Header = ({ auth }) => {
 							<li className={styles.link}>Admin</li>
 						</Link> */}
 					</ul>
-					{console.log(library)}
 					<div className={styles.action}>
 						{active ? (
 							<Button
@@ -366,6 +368,9 @@ const Header = ({ auth }) => {
 								</Link>
 								<Link to="/about" onClick={() => setShow1(false)}>
 									<li className={styles.link}>Giới thiệu</li>
+								</Link>
+								<Link to="/contact">
+									<li className={styles.link}>Hòm thư</li>
 								</Link>
 								{auth ? (
 									<li className={styles.linkGroup}>

@@ -4,6 +4,7 @@ const path = require("path");
 const imageController = require("./controllers/imageController");
 const projectController = require("./controllers/projectController");
 const beneficyController = require("./controllers/beneficyController");
+const contactController = require("./controllers/contactController");
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.use(express.static(buildPath));
 
 const mongoose = require("mongoose");
 mongoose.connect(
-	"mongodb+srv://lupmit:auCbPlc2urr4aAI8@cluster0.yereb.mongodb.net/charityProject?retryWrites=true&w=majority",
+	"mongodb+srv://nkieumy221:220101my@cluster0.ncstkru.mongodb.net/charityProject?retryWrites=true&w=majority",
 	{ useNewUrlParser: true },
 	(err) => {
 		if (!err) {
@@ -40,6 +41,9 @@ app.use("/api/project", projectController);
 
 //beneficy
 app.use("/api/beneficy", beneficyController);
+
+//contact
+app.use("/api/contact", contactController);
 
 app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname, "..", "build/index.html"));

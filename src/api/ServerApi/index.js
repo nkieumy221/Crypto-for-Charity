@@ -75,6 +75,34 @@ const createOrUpdateBeneficy = async (token, beneficy) => {
 	});
 };
 
+const getAllContact = () => {
+	return axios({
+		method: "get",
+		url: `${BASE_SERVER_URL}/contact`,
+	});
+};
+
+const deleteContactById = async (token,id) => {
+	return axios({
+		method: "get",
+		url: `${BASE_SERVER_URL}/contact/delete/${id}`,
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+};
+
+const createOrUpdateContact = async (token,contact) => {
+	return axios({
+		method: "post",
+		url: `${BASE_SERVER_URL}/contact/`,
+		data: contact,
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+};
+
 export {
 	getAllProject,
 	getProjectByAddress,
@@ -84,4 +112,7 @@ export {
 	getAllBeneficy,
 	deleteBeneficyByAddress,
 	createOrUpdateBeneficy,
+	getAllContact,
+	deleteContactById,
+	createOrUpdateContact,
 };

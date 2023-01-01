@@ -35,6 +35,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SwapToken from "./pages/SwapToken";
 import BeneficyManager from "./pages/BeneficyManager";
+import Contact from "./pages/Contact";
 
 function App() {
 	const { active, connector, activate, account } = useWeb3React();
@@ -93,6 +94,7 @@ function App() {
 						<Route path="/explorer" element={<Explorer />} />
 						<Route path="/swap" element={<SwapToken />} />
 						<Route path="/explorer/:address" element={<ExplorerDetail />} />
+						<Route path="/contact" element={<Contact />} />
 						<Route path="/auth" element={<RequireAuth />}>
 							<Route
 								path="/auth/project-manager"
