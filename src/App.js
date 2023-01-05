@@ -36,6 +36,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SwapToken from "./pages/SwapToken";
 import BeneficyManager from "./pages/BeneficyManager";
 import Contact from "./pages/Contact";
+import ContactManager from "./pages/ContactManager";
 
 function App() {
 	const { active, connector, activate, account } = useWeb3React();
@@ -103,6 +104,10 @@ function App() {
 							<Route
 								path="/auth/beneficy-manager"
 								element={<BeneficyManager />}
+							/>
+							<Route
+								path="/auth/contact-manager"
+								element={<ContactManager />}
 							/>
 							<Route
 								path="/auth/project/:address/edit"

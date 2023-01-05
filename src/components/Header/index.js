@@ -289,6 +289,13 @@ const Header = ({ auth }) => {
 										>
 											Người thụ hưởng
 										</Dropdown.Item>
+										<Dropdown.Item
+											className={styles.navItem}
+											as={Link}
+											to="/auth/contact-manager"
+										>
+											Hòm thư
+										</Dropdown.Item>
 									</Dropdown.Menu>
 								</Dropdown>
 							</>
@@ -404,6 +411,9 @@ const Header = ({ auth }) => {
 													onClick={() => setShow1(false)}
 												>
 													<li className={styles.linkItem}>Người thụ hưởng</li>
+												</Link>
+												<Link to="/auth/contact-manager">
+													<li className={styles.link}>Hòm thư</li>
 												</Link>
 											</div>
 										)}

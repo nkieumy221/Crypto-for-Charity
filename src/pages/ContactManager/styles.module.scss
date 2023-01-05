@@ -1,0 +1,59 @@
+.wrapper {
+	padding: 50px 0;
+	@media (max-width: 1080px) {
+		padding-top: 0 !important;
+	}
+	.title {
+		text-align: left;
+		font-weight: 700;
+	}
+	ul {
+		list-style: none;
+		padding-left: 0;
+		margin-top: 40px;
+	}
+	.mailItem {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		background-color: rgba(0, 0, 0, 0.04);
+		padding: 20px;
+		border-radius: 10px;
+		box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+		margin-bottom: 10px;
+		.username {
+			display: flex;
+			align-items: center;
+			h4, p {
+				margin: 0;
+				padding: 0;
+			}
+			h4 {
+				font-size: 18px;
+				line-height: 20px;
+				font-weight: 600;
+			}
+			p {
+				font-size: 12px;
+				line-height: 24px;
+				padding-left: 8px;
+			}
+		}
+		.address {
+			font-size: 12px;
+			padding: 10px 0 0;
+			color: #838383;
+			text-align: left;
+		}
+		.content {
+			font-size: 14px;
+			text-align: left;
+		}
+		.btnDel {
+			font-size: 20px;
+			cursor: pointer;
+		}
+	}
+}
+
+

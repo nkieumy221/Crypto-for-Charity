@@ -2,6 +2,7 @@ const express = require("express");
 var router = express.Router();
 const ContactModel = require("../models/contactModel");
 const authMiddleware = require("../middlewares/middleware");
+var ObjectId = require('mongodb').ObjectID;
 
 router.get("/", (req, res) => {
 	ContactModel.find((err, docs) => {
@@ -20,7 +21,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-	ContactModel.findOne({ id: req.params.id }, (err, doc) => {
+	ContactModel.findOne({ "_id": new ObjectId(req.params.id) }, (err, doc) => {
 		if (!err) {
 			res.status(200).json({
 				error: null,
@@ -36,7 +37,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", [authMiddleware], (req, res) => {
-	ContactModel.findOne({ id: req.body.id }, (err, doc) => {
+	ContactModel.findOne({ "_id": new ObjectId(req.body.id) }, (err, doc) => {
 		if (!err && !doc) {
 			insertContact(req, res);
 		} else {
@@ -47,11 +48,11 @@ router.post("/", [authMiddleware], (req, res) => {
 
 function insertContact(req, res) {
 	var contact = new ContactModel();
-	contact.id = req.body.id;
 	contact.name = req.body.name;
 	contact.phone = req.body.phone;
 	contact.address = req.body.address;
 	contact.content = req.body.content;
+	contact.status = req.body.status;
 	contact.save((err, doc) => {
 		if (!err)
 			res.status(200).json({
@@ -89,7 +90,7 @@ function updateStatusContact(req, res) {
 }
 
 router.get("/delete/:id", [authMiddleware], (req, res) => {
-	ContactModel.findOneAndRemove({ id: req.params.id }, (err) => {
+	ContactModel.findOneAndRemove({ "_id": new ObjectId(req.params.id) }, (err) => {
 		if (!err) {
 			res.status(200).json({
 				error: null,
