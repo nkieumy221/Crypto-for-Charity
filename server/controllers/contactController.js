@@ -37,7 +37,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", [authMiddleware], (req, res) => {
-	ContactModel.findOne({ "_id": new ObjectId(req.body.id) }, (err, doc) => {
+	ContactModel.findOne({ "_id": req.body._id }, (err, doc) => {
 		if (!err && !doc) {
 			insertContact(req, res);
 		} else {
@@ -70,7 +70,7 @@ function insertContact(req, res) {
 
 function updateStatusContact(req, res) {
 	ContactModel.findOneAndUpdate(
-		{ status: req.body.status },
+		{ "_id": req.body._id },
 		req.body,
 		{ new: true },
 		(err, doc) => {

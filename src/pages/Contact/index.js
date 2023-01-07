@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../../components/Container";
 import Pic4 from "../../assets/images/pic4.svg";
 import styles from "./styles.module.scss";
@@ -10,13 +10,14 @@ const Contact = () => {
 	const [inputs, setInputs] = useState({});
 	const [show, setShow] = useState(false);
 	const token = localStorage.getItem("token");
-	inputs.id = Math.random()
+
 	const handleChange = (event) => {
 		const name = event.target.name;
 		const value = event.target.value;
 		setInputs(values => ({...values, [name]: value}))
 	}
-
+	
+	inputs.status = 0;
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		createOrUpdateContact(token,inputs).then((res) => {
@@ -36,44 +37,44 @@ const Contact = () => {
 							Liên hệ với chúng tôi để giải quyết các khó khăn của bạn.
 							Chúng tôi sẽ xem xét và giúp đỡ bạn nhanh chóng nhất có thế.
 						</div>
-							<small id="emailHelp" class="form-text text-muted">Chúng tôi sẽ không bao giờ chia sẻ thông tin của bạn với bất kỳ ai khác.</small>
+							<small id="emailHelp" className="form-text text-muted">Chúng tôi sẽ không bao giờ chia sẻ thông tin của bạn với bất kỳ ai khác.</small>
 						<form onSubmit={handleSubmit}>
-							<div class="form-group mt-2">
+							<div className="form-group mt-2">
 								<input 
 									type="text" 
-									class="form-control"  
+									className="form-control"  
 									name="name" 
 									value={inputs.name || ""} 
 									onChange={handleChange} 
 									placeholder="Tên của bạn..." />
 							</div>
-							<div class="form-group mt-2">
+							<div className="form-group mt-2">
 								<input 
 									type="text" 
-									class="form-control" 
+									className="form-control" 
 									name="phone" 
 									value={inputs.phone || ""} 
 									onChange={handleChange} 
 									placeholder="Số điện thoại hoặc Email..." />
 							</div>
-							<div class="form-group mt-2">
+							<div className="form-group mt-2">
 								<input 
 									type="text" 
-									class="form-control" 
+									className="form-control" 
 									name="address" 
 									value={inputs.address || ""} 
 									onChange={handleChange} 
 									placeholder="Địa chỉ liên hệ..." />
 							</div>
-							<div class="form-group mt-2">
+							<div className="form-group mt-2">
 								<textarea 
-									class="form-control" 
+									className="form-control" 
 									name="content" 
 									value={inputs.content || ""} 
 									onChange={handleChange} 
 									placeholder="Nội dung..." />
 							</div>
-							<button type="submit" class="btn btn-warning mt-2">Gửi thông tin</button>
+							<button type="submit" className="btn btn-warning mt-2">Gửi thông tin</button>
 						</form>
 					</div>
 					<div className={styles.imageWrapper}>
