@@ -49,11 +49,10 @@
     "web3-token": "^0.2.5"
   },
   "scripts": {
-    "start-client": "react-scripts start",
-    "build": "(yarn install && GENERATE_SOURCEMAP=false react-scripts --max_old_space_size=4096 --optimize-for-size build) && (cd server && yarn install)",
+    "start-fe": "react-scripts start",
+    "start-be": "cd server && yarn start",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start": "cd server && yarn start"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

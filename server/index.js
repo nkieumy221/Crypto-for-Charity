@@ -22,7 +22,7 @@ mongoose.connect(
 	{ useNewUrlParser: true },
 	(err) => {
 		if (!err) {
-			console.log("MongoDB Connection Succeeded.");
+			console.log("MongoDB Connection Succeeded.!!!");
 		} else {
 			console.log("Error in DB connection : " + err);
 		}
@@ -45,9 +45,9 @@ app.use("/api/beneficy", beneficyController);
 //contact
 app.use("/api/contact", contactController);
 
-app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname, "..", "build/index.html"));
-});
+// app.get("*", (req, res) => {
+// 	res.sendFile(path.join(__dirname, "..", "build/index.html"));
+// });
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server started on port ${port}`));

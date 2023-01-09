@@ -1,4 +1,4 @@
-export const BASE_SERVER_URL = "/api";
+export const BASE_SERVER_URL = "http://localhost:5000/api";
 
 export const BASE_PROVIDER_URL = "http://localhost:7545";
 
