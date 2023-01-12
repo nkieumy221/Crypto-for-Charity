@@ -103,6 +103,41 @@ const createOrUpdateContact = async (token,contact) => {
 	});
 };
 
+const getAllComment = () => {
+	return axios({
+		method: "get",
+		url: `${BASE_SERVER_URL}/comment`,
+	});
+};
+
+const getCommentByAddress = (address) => {
+	return axios({
+		method: "get",
+		url: `${BASE_SERVER_URL}/comment/${address}`,
+	});
+}
+
+const deleteCommentByAddress = async (token,id) => {
+	return axios({
+		method: "get",
+		url: `${BASE_SERVER_URL}/comment/delete/${id}`,
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+};
+
+const createOrUpdateComment = async (token,contact) => {
+	return axios({
+		method: "post",
+		url: `${BASE_SERVER_URL}/comment/`,
+		data: contact,
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+};
+
 export {
 	getAllProject,
 	getProjectByAddress,
@@ -115,4 +150,8 @@ export {
 	getAllContact,
 	deleteContactById,
 	createOrUpdateContact,
+	getAllComment,
+	getCommentByAddress,
+	deleteCommentByAddress,
+	createOrUpdateComment
 };

@@ -13,7 +13,7 @@ import Chart from "../../components/Chart";
 import Container from "../../components/Container";
 import Button from "../../components/Button";
 import Loading from "../../components/Loading";
-import { getProjectByAddress } from "../../api/ServerApi";
+import { createOrUpdateComment, getCommentByAddress, getProjectByAddress } from "../../api/ServerApi";
 import styles from "./styles.module.scss";
 import { useLibrary } from "../../helpers/Hook";
 // import ReactToPdf from "react-to-pdf";
@@ -23,6 +23,8 @@ import AddressComponent from "../../components/Address";
 import Table from "../../components/Table";
 import { roundNumber } from "../../utils/number";
 import EthIcon from "../../assets/images/icon-eth.png";
+import { BiUser } from "react-icons/bi";
+import Modal from "../../components/Modal";
 
 const ProjectDetail = (props) => {
 	const ref = React.useRef(null);
@@ -30,6 +32,10 @@ const ProjectDetail = (props) => {
 	const [infoFromBE, setInfoFromBE] = useState();
 	const [loading, setLoading] = useState(true);
 	const [onPrint, setOnPrint] = useState(false);
+	const [inputComments, setInputComment] = useState({});
+	const [showCommentAlert, setShowCommentAlert] = useState(false);
+	const [listComments, setListComments] = useState([]);
+	const token = localStorage.getItem("token");
 	const params = useParams();
 	const address = params.address;
 
@@ -264,18 +270,51 @@ const ProjectDetail = (props) => {
 
 	const pageStyle = "@page { size: A3}";
 
+	const handleChange = (event) => {
+		const name = event.target.name;
+		const value = event.target.value;
+		setInputComment(values => ({...values, [name]: value}))
+	}
+
+	const [reRender, setReRender] = useState(true);
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		inputComments.address = address;
+		inputComments.time = Date.now();
+		createOrUpdateComment(token,inputComments).then((res) => {
+			setInputComment({})
+			setShowCommentAlert(true);
+			setReRender(!reRender)
+		});
+		setInputComment({})
+	}
+
+
+	useEffect(() => {
+		async function fetchData() {
+			try {
+				const response = await getCommentByAddress(address);
+				setListComments(response.data.data);
+			} catch (e) {
+				console.error(e);
+			}
+		};
+		fetchData();
+	}, [address, reRender]);
+
 	return loading ? (
 		<Loading style={{ height: "100vh" }} />
 	) : (
 		<div className={styles.wrapper} ref={ref}>
 			<div className={styles.headerWrapper}>
-				<img src={infoFromBE.image} />
+				<img alt="img detail" src={infoFromBE?.image} />
 				<div className={styles.contentWrapper}>
 					<div className={styles.content}>
 						<h5>{getStatus(info.state)}</h5>
 						<h2>{info.name}</h2>
 						<AddressComponent address={address} style={{ color: "#f0b90b" }} />
-						<p>{infoFromBE.description} </p>
+						<p>{infoFromBE?.description} </p>
 						<div className={styles.progressContent}>
 							<ProgressBar
 								animated
@@ -313,7 +352,7 @@ const ProjectDetail = (props) => {
 					<h3 className={styles.title}>Vấn đề gặp phải?</h3>
 					<div className={styles.mainContent}>
 						<div className={styles.leftContent}>
-							<p>{infoFromBE.problem}</p>
+							<p>{infoFromBE?.problem}</p>
 							<ul className={styles.info}>
 								<li className={styles.item}>
 									<span className={styles.value}>{info.numberOfDonator}</span>
@@ -360,7 +399,7 @@ const ProjectDetail = (props) => {
 							Thông tin thêm
 						</div>
 						<div
-							dangerouslySetInnerHTML={{ __html: infoFromBE.infomation }}
+							dangerouslySetInnerHTML={{ __html: infoFromBE?.infomation }}
 						></div>
 
 						<div style={{ fontWeight: 600, fontSize: "20px" }}>
@@ -388,7 +427,7 @@ const ProjectDetail = (props) => {
 							<TabComponent eventKey="desc" title="Thông tin dự án">
 								<div
 									style={{ paddingTop: "20px" }}
-									dangerouslySetInnerHTML={{ __html: infoFromBE.infomation }}
+									dangerouslySetInnerHTML={{ __html: infoFromBE?.infomation }}
 								></div>
 							</TabComponent>
 							<TabComponent eventKey="all-benficy" title="Người thụ hưởng">
@@ -412,6 +451,66 @@ const ProjectDetail = (props) => {
 						</Tab>
 					</Container>
 				)}
+			</div>
+			<div className={styles.comment}>
+				<Container>
+					<div className={styles.enterComment}>
+						<p>Để lại bình luận của bạn</p>
+						<form onSubmit={handleSubmit}>
+							<div className="form-group mt-2">
+								<input 
+									type="text" 
+									className="form-control"  
+									name="name" 
+									value={inputComments.name || ""} 
+									onChange={handleChange} 
+									placeholder="Tên của bạn..." />
+							</div>
+							<div className="form-group mt-2">
+								<textarea 
+									className="form-control" 
+									name="content" 
+									value={inputComments.content || ""} 
+									onChange={handleChange} 
+									placeholder="Nội dung..." />
+							</div>
+							<button type="submit" className="btn btn-warning mt-2">Bình luận</button>
+						</form>
+					</div>
+					<ul className={styles.listComment}>
+						{listComments && listComments.map(item => (
+							<li className={styles.commentItem}>
+								<div className={styles.commentUserInfo}>
+									<div className={styles.commentAvt}>
+										<BiUser />
+									</div>
+									<div>
+										<span className={styles.commentUserName}>{item?.name}</span>
+										<span className={styles.commentTime}>
+											{moment(item.time).format('DD-MM-YYYY HH:mm')}
+										</span>
+									</div>
+								</div>
+								<div className={styles.commentBody}>
+									{item.content}
+								</div>
+							</li>
+						))}
+					</ul>
+				</Container>
+				<Modal
+					show={showCommentAlert}
+					onHide={() => {
+						setShowCommentAlert(false);
+					}}
+					header={"Gửi bình luận"}
+					content="Nội dung của bạn đã được gửi. Cảm ơn bạn đã quan tâm đến dự án của chúng tôi."
+					footer={
+						<Button onClick={() => {setShowCommentAlert(false)}}>
+							Đồng ý
+						</Button>
+					}
+				></Modal>
 			</div>
 		</div>
 	);

@@ -283,4 +283,57 @@
 			}
 		}
 	}
+	.comment {
+		margin-top: 16px;
+		.enterComment {
+			p {
+				text-align: left;
+				font-size: 14px;
+				font-weight: 600;
+			}
+		}
+		ul {
+			margin-top: 20px;
+			padding-left: 0;
+		}
+		li {
+			margin-bottom: 10px;
+		}
+		.listComment {
+
+		}
+		.commentItem {
+			border: 1px solid #ced4da;
+			padding: 10px;
+			border-radius: 10px;
+		}
+
+		.commentUserInfo {
+			display: flex;
+			.commentAvt {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #ccc;
+				padding: 12px 10px;
+				font-size: 16px;
+				border-radius: 50%;
+			}
+			.commentUserName {
+				font-size: 14px;
+				font-weight: 600;
+				margin-left: 12px;
+			}
+			.commentTime {
+				font-size: 12px;
+				color: #ccc;
+				margin-left: 12px;
+			}
+		}
+		.commentBody {
+			font-size: 14px;
+			text-align: left;
+			padding-top: 10px;
+		}
+	}
 }

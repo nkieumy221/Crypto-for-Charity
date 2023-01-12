@@ -5,6 +5,7 @@ const imageController = require("./controllers/imageController");
 const projectController = require("./controllers/projectController");
 const beneficyController = require("./controllers/beneficyController");
 const contactController = require("./controllers/contactController");
+const commentController = require("./controllers/commentController");
 
 const app = express();
 
@@ -44,6 +45,9 @@ app.use("/api/beneficy", beneficyController);
 
 //contact
 app.use("/api/contact", contactController);
+
+//comment
+app.use("/api/comment", commentController);
 
 // app.get("*", (req, res) => {
 // 	res.sendFile(path.join(__dirname, "..", "build/index.html"));
