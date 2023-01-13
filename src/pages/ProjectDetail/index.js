@@ -396,13 +396,6 @@ const ProjectDetail = (props) => {
 				{onPrint ? (
 					<Container>
 						<div style={{ fontWeight: 600, fontSize: "20px" }}>
-							Thông tin thêm
-						</div>
-						<div
-							dangerouslySetInnerHTML={{ __html: infoFromBE?.infomation }}
-						></div>
-
-						<div style={{ fontWeight: 600, fontSize: "20px" }}>
 							Danh sách đóng góp
 						</div>
 						<Table
@@ -426,7 +419,7 @@ const ProjectDetail = (props) => {
 						<Tab address={address} className={styles.tab}>
 							<TabComponent eventKey="desc" title="Thông tin dự án">
 								<div
-									style={{ paddingTop: "20px" }}
+									className={styles.descDetails}
 									dangerouslySetInnerHTML={{ __html: infoFromBE?.infomation }}
 								></div>
 							</TabComponent>

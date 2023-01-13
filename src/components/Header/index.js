@@ -255,9 +255,6 @@ const Header = ({ auth }) => {
 						<Link to="/project">
 							<li className={styles.link}>Dự án</li>
 						</Link>
-						<Link to="/explorer">
-							<li className={styles.link}>Khám phá</li>
-						</Link>
 						<Link to="/swap">
 							<li className={styles.link}>Hoán đổi</li>
 						</Link>
@@ -366,9 +363,6 @@ const Header = ({ auth }) => {
 							<ul className={styles.navLink}>
 								<Link to="/project" onClick={() => setShow1(false)}>
 									<li className={styles.link}>Dự án</li>
-								</Link>
-								<Link to="/explorer" onClick={() => setShow1(false)}>
-									<li className={styles.link}>Khám phá</li>
 								</Link>
 								<Link to="/swap" onClick={() => setShow1(false)}>
 									<li className={styles.link}>Hoán đổi</li>

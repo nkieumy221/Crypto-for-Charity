@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { FiDelete } from "react-icons/fi";
@@ -7,38 +8,6 @@ import Container from "../../components/Container";
 import Modal from "../../components/Modal";
 import styles from "./styles.module.scss";
 
-const mock = [
-	{
-		"_id": "63b1a185b8f1121c873b389f",
-		"id": "0.6676334346933983",
-		"name": "Kiều Myy",
-		"phone": "0377277875",
-		"address": "Pleiku",
-		"content": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, , comes from a line in section 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from  by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, , comes from a line in section 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from  by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
-		"status": 0,
-		"__v": 0
-	},
-	{
-		"_id": "63b1a5c737f52ac0c752aeb0",
-		"id": "0.5078177795025016",
-		"name": "Kiều Myy",
-		"phone": "0377277875",
-		"address": "Pleiku",
-		"content": "hhhh",
-		"status": 1,
-		"__v": 0
-	},
-	{
-		"_id": "63b1a5c737f52ac0c752aeb0",
-		"id": "0.5078177795025016",
-		"name": "Kiều Myy",
-		"phone": "0377277875",
-		"address": "Pleiku",
-		"content": "hhhh",
-		"status": 2,
-		"__v": 0
-	}
-]
 const ContactManager = () => {
 	const [loading, setLoading] = useState(false);
 	const [buttonLoading, setButtonLoading] = useState(false);
@@ -76,6 +45,8 @@ const ContactManager = () => {
 			setButtonLoading(false);
 		});
 	}
+
+	console.log(data)
 
 	return (
 		<div className={styles.wrapper}>

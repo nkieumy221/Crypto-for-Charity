@@ -55,7 +55,7 @@
 				}
 				& > h2 {
 					margin: 0px 0px 16px;
-					font-size: 36px;
+					font-size: 28px;
 					font-weight: 700;
 					line-height: 42px;
 					color: rgb(255, 255, 255);
@@ -69,6 +69,7 @@
 					color: rgb(224, 224, 224);
 					overflow: hidden;
 					text-overflow: ellipsis;
+					height: 100px;
 				}
 				.progressContent {
 					:global {
@@ -282,6 +283,11 @@
 				margin-right: 6px;
 			}
 		}
+
+		.descDetails {
+			height: 460px;
+			overflow-y: scroll;
+		}
 	}
 	.comment {
 		margin-top: 16px;
@@ -336,4 +342,20 @@
 			padding-top: 10px;
 		}
 	}
+}
+
+@media print{ 
+	.rightContent{
+		display: none !important;
+	}
+	.informationDetails{
+		display: none !important;
+	}
+	.information {
+		padding: 20px 0 !important;
+	}
+	.comment {
+		display: none;
+	}
+
 }

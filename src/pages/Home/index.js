@@ -179,18 +179,18 @@ function Home(props) {
 					// autoPlay={true}
 					showDots={true}
 				>
-					<div className={styles.image}>
-						<img src={hightlight[0].image} />
+					{hightlight.map(item => <div className={styles.image}>
+						<img src={item.image} />
 
 						<div className={styles.projectInfo}>
 							<div className={styles.projectInfoWrapper}>
 								<div className={styles.feature}>Dự án nổi bật</div>
-								<h2 className={styles.projectName}>{hightlight[0].name}</h2>
+								<h2 className={styles.projectName}>{item.name}</h2>
 								<div className={styles.projectDesc}>
-									{hightlight[0].description}
+									{item.description}
 								</div>
 								<Link
-									to={`/project/${hightlight[0].projectAddress}`}
+									to={`/project/${item.projectAddress}`}
 									className={styles.link}
 								>
 									<button data-bn-type="button" className={styles.button}>
@@ -199,30 +199,8 @@ function Home(props) {
 								</Link>
 							</div>
 						</div>
-					</div>
-					{hightlight.length > 2 ? (
-						<div className={styles.image}>
-							<img src={hightlight[1].image} />
+					</div>)}
 
-							<div className={styles.projectInfo}>
-								<div className={styles.projectInfoWrapper}>
-									<div className={styles.feature}>Dự án nổi bật</div>
-									<h2 className={styles.projectName}>{hightlight[1].name}</h2>
-									<div className={styles.projectDesc}>
-										{hightlight[1].description}
-									</div>
-									<Link
-										to={`/project/${hightlight[1].projectAddress}`}
-										className={styles.link}
-									>
-										<button data-bn-type="button" className={styles.button}>
-											Tìm hiểu thêm
-										</button>
-									</Link>
-								</div>
-							</div>
-						</div>
-					) : null}
 				</Carousel>
 			</div>
 
